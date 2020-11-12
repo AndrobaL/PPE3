@@ -2,20 +2,21 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-### C'est quoi cette Boutique ? 🔣
-C'est une manière simpliste mais extrêmement efficace de vendre des produits en ligne à l'aide d'un site fait avec symfony
+### C'est quoi ce projet ? 🔣
+C'est une projet basic qui à l'aider du language MYSQL et Java permet de gérer une structure comportant des ventes, factures, comptes clients/admins ainsi que des produits de différentes catégorie (dans notre cas des plugins Bukkit/Spigot)
 
 Ce projet a été créé pour le cours de BTS SIO 2
 
 ### Ca permet quoi ?
 
-  * Vendre des produits
   * Gérer des produits
-  * Effectuer un connection/inscription de compte
+  * Gérer des ventes
+  * Gérer des factures
+  * Gérer des comptes client/admin
 
 ### A faire
 Presque terminées, les opérations suivantes doivent être effectuées:
-  - Optimisation du code en général
+  - ???
 
 ### Credits
 * [Killyan](https://github.com/AndrobaL) - Concepteur du projet
