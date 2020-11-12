@@ -22,13 +22,13 @@ Presque terminées, les opérations suivantes doivent être effectuées:
 
 ### Installation ✏️
 ```sh
-mkdir Boutique
-cd /Boutique
-git clone -b https://github.com/AndrobaL/Boutique
+mkdir PPE3
+cd /PPE3
+git clone -b https://github.com/AndrobaL/PPE3
 ```
 ###### IMPORT le projet avec MAVEN
 ###### BUILD PROJECT🌀
 
 ### Documentation 📝
 
- - Documentation - https://github.com/AndrobaL/Boutique/edit/master/README.md
+ - Documentation - https://github.com/AndrobaL/PPE3/edit/master/README.md
