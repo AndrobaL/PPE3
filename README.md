@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 ### C'est quoi ce projet ? 🔣
-C'est une projet basic qui à l'aider du language MYSQL et Java permet de gérer une structure comportant des ventes, factures, comptes clients/admins ainsi que des produits de différentes catégorie (dans notre cas des plugins Bukkit/Spigot)
+C'est une projet basic qui à l'aider du language MYSQL et Java permet de gérer une structure comportant des ventes, factures, comptes clients/admins ainsi que des produits de différentes catégorie (dans notre cas des plugins Bukkit/Spigot) avec quelques fonctiones jackie tuning comme du RGB ou autre.
 
 Ce projet a été créé pour le cours de BTS SIO 2
 
