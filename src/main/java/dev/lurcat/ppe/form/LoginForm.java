@@ -24,8 +24,6 @@ public class LoginForm extends JFrame {
         jLabelPassword = new javax.swing.JLabel();
         jLabelInfo = new javax.swing.JLabel();
         jButtonConnexion.setText("Connexion");
-        //jButtonConnexion.setBackground(Color.BLACK);
-        //jButtonConnexion.setForeground(Color.BLACK);
         jButtonConnexion.setMultiClickThreshhold(50);
         jButtonConnexion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -41,11 +39,10 @@ public class LoginForm extends JFrame {
 
         jLabelPassword.setText("Password");
 
-        jLabelInfo.setText("Invalid username or password");
+        jLabelInfo.setText("Enter username & password");
         jLabelInfo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         GroupLayout layout = new GroupLayout(this.getContentPane());
-        //setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
@@ -123,7 +120,8 @@ public class LoginForm extends JFrame {
         String password = jPasswordField1.getText();
         Agent agent = PPE.INSTANCE.getSqlManager().login(login, password);
         if (agent == null) {
-            jLabelInfo.setText("Invalid username or password");
+            JOptionPane.showMessageDialog(this,"Invalid username or password","Connection Failed", JOptionPane.ERROR_MESSAGE);
+            jLabelInfo.setText("Invalid username or password!");
         } else {
             this.disable();
             setVisible(false);

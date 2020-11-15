@@ -5,8 +5,6 @@ import dev.lurcat.ppe.api.MethodInfo;
 import dev.lurcat.ppe.api.Title;
 import dev.lurcat.ppe.shop.Commande;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,7 +14,6 @@ import java.util.logging.Logger;
 
 public class CommandeManager extends Manager {
 
-    private final List<Commande> commandes = new ArrayList<>();
     private final SQLManager sqlManager;
 
     public CommandeManager(SQLManager sqlManager) {
@@ -37,9 +34,26 @@ public class CommandeManager extends Manager {
             request = String.format("SELECT * FROM Commande WHERE transaction = %s AND state = %s AND id_agent = %s AND id_client = %s", commande.getTransation(), commande.getState(), commande.getId_agent(), commande.getId_client());
             ResultSet r = DataAccessObject.getInstance().requeteSelection(request);
             if (r.last()) {
-                return new Commande(r.getInt("id_commande"), r.getDate("transaction"), r.getString("state"), r.getInt("id_agent"), r.getInt("id_client"));
+                return new Commande(r.getInt("id_commande"), r.getString("transaction"), r.getString("state"), r.getInt("id_agent"), r.getInt("id_client"));
             }
             this.findAll();
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @MethodInfo(info = "Avoir une Commande de la bdd")
+    public Commande getCommande(int id) {
+        if (!sqlManager.isConnected()) {
+            System.out.println("Erreur: La base de donnée est pas connectée !");
+            return null;
+        }
+        try {
+            ResultSet r = DataAccessObject.getInstance().requeteSelection(String.format("SELECT * FROM Commande WHERE id_commande = %d", id));
+            if (r.next()) {
+                return new Commande(r.getInt("id_commande"), r.getString("transaction"), r.getString("state"), r.getInt("id_agent"), r.getInt("id_client"));
+            }
         } catch (SQLException ex) {
             Logger.getLogger(SQLManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -52,8 +66,8 @@ public class CommandeManager extends Manager {
             System.out.println("Erreur: La base de donnée est pas connectée !");
             return;
         }
-        String request = String.format("UPDATE Commande SET transaction = %s, state = %s, id_agent = %s, id_client = %s WHERE id_commande = %s", commande.getTransation(), commande.getState(), commande.getId_agent(), commande.getId_client(), commande.getId_commande());
-        DataAccessObject.getInstance().requeteSelection(request);
+        String request = String.format("UPDATE Commande SET transaction = %s, state = %s, id_agent = %d, id_client = %d WHERE id_commande = %d", commande.getTransation().toString(), commande.getState(), commande.getId_agent(), commande.getId_client(), commande.getId_commande());
+        DataAccessObject.getInstance().requete(request);
         this.findAll();
     }
 
@@ -63,7 +77,7 @@ public class CommandeManager extends Manager {
             System.out.println("Erreur: La base de donnée est pas connectée !");
             return;
         }
-        DataAccessObject.getInstance().requeteSelection(String.format("REMOVE * FROM Command WHERE id_commande = %s", commande.getId_commande()));
+        DataAccessObject.getInstance().requeteAction("DELETE FROM Commande WHERE id_commande = " + commande.getId_commande());
         this.findAll();
     }
 
@@ -74,11 +88,12 @@ public class CommandeManager extends Manager {
             System.out.println("Erreur: La base de donnée est pas connectée !");
             return null;
         }
+        List<Commande> commandes = new ArrayList<>();
         try {
             ResultSet r = DataAccessObject.getInstance().requeteSelection("SELECT * FROM Commande");
             commandes.clear();
             while (r.next()) {
-                Commande commande = new Commande(r.getInt("id_commande"), r.getDate("transaction"), r.getString("state"), r.getInt("id_agent"), r.getInt("id_client"));
+                Commande commande = new Commande(r.getInt("id_commande"), r.getString("transaction"), r.getString("state"), r.getInt("id_agent"), r.getInt("id_client"));
                 commandes.add(commande);
             }
         } catch (SQLException ex) {

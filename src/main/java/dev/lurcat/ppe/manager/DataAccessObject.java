@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 
 public class DataAccessObject {
 
-    private static String nomServeur = "10.0.10.138";
+    private static String nomServeur = "192.168.1.253"; //10.0.10.138
     private static String port = "3306";
     private static String nomBdd = "ppe";
     private static String nomUtilisateur = "root";

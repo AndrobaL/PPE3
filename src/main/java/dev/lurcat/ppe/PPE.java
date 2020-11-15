@@ -1,15 +1,11 @@
 package dev.lurcat.ppe;
 
 import dev.lurcat.ppe.form.AdminForm;
-import dev.lurcat.ppe.form.LoginForm;
-import dev.lurcat.ppe.form.impl.ModifierForm;
 import dev.lurcat.ppe.manager.ClientManager;
+import dev.lurcat.ppe.manager.CommandeManager;
 import dev.lurcat.ppe.manager.PluginManager;
 import dev.lurcat.ppe.manager.SQLManager;
-import dev.lurcat.ppe.manager.CommandeManager;
 import lombok.Getter;
-
-import java.util.HashMap;
 
 @Getter
 public class PPE {
@@ -26,6 +22,7 @@ public class PPE {
         this.clientManager = new ClientManager(sqlManager);
         this.commandeManager = new CommandeManager(sqlManager);
         this.pluginManager = new PluginManager(sqlManager);
+
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override

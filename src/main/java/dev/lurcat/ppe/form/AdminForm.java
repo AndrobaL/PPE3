@@ -1,15 +1,20 @@
 package dev.lurcat.ppe.form;
 
 import dev.lurcat.ppe.PPE;
+import dev.lurcat.ppe.form.impl.AjouterForm;
 import dev.lurcat.ppe.form.impl.ModifierForm;
 import dev.lurcat.ppe.manager.ClientManager;
+import dev.lurcat.ppe.manager.CommandeManager;
+import dev.lurcat.ppe.manager.PluginManager;
+import dev.lurcat.ppe.shop.Commande;
 import dev.lurcat.ppe.shop.Plugin;
 import dev.lurcat.ppe.users.Client;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
-import java.util.List;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AdminForm extends JFrame {
 
@@ -46,7 +51,6 @@ public class AdminForm extends JFrame {
         Supprimer = new javax.swing.JButton();
         Editer = new javax.swing.JButton();
         Ajouter = new javax.swing.JButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
         jToggleButtonQuit = new javax.swing.JToggleButton();
         jLabelAccount = new javax.swing.JLabel();
 
@@ -85,10 +89,10 @@ public class AdminForm extends JFrame {
         });
         jListPlugins.setName("Plugins");
         jListPlugins.setModel(new DefaultListModel());
-        /*DefaultListModel model = (DefaultListModel) jListPlugins.getModel();
+        DefaultListModel model = (DefaultListModel) jListPlugins.getModel();
         for (Plugin plugin : PPE.INSTANCE.getPluginManager().findAll()) {
-            model.addElement(plugin.getName());
-        }*/
+            model.addElement(plugin.getId() + " - " + plugin.getName() + " - " + plugin.getPrice() + " - " + plugin.getPluginType().name());
+        }
         jScrollPanePlugins.setViewportView(jListPlugins);
 
         buttonGroup1.add(Bukkit);
@@ -157,8 +161,12 @@ public class AdminForm extends JFrame {
 
         jTabbedData.addTab("Plugins", jPanelPlugins);
 
-        jListCommandes.setName("Commandes");
         jListCommandes.setModel(new DefaultListModel());
+        jListCommandes.setName("Commandes");
+        model = (DefaultListModel) jListCommandes.getModel();
+        for (Commande commande : PPE.INSTANCE.getCommandeManager().findAll()) {
+            model.addElement(commande.getId_commande() + " - " + commande.getTransation().toString() + " - " + commande.getState() + " - " + commande.getId_client() + " - " + commande.getId_agent());
+        }
         jScrollPaneCommandes.setViewportView(jListCommandes);
 
         jLabeCommandes.setText("Nombre des commandes");
@@ -196,9 +204,9 @@ public class AdminForm extends JFrame {
 
         jListClients.setModel(new DefaultListModel());
         jListClients.setName("Clients");
-        DefaultListModel model = (DefaultListModel) jListClients.getModel();
+        model = (DefaultListModel) jListClients.getModel();
         for (Client client : PPE.INSTANCE.getClientManager().findAll()) {
-            model.addElement(client.getName());
+            model.addElement(client.getId_client() + " - " + client.getName() + " - " + client.getMail() + " - " + client.getNumber());
         }
         jScrollPaneClients.setViewportView(jListClients);
 
@@ -300,7 +308,6 @@ public class AdminForm extends JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(Supprimer, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
@@ -322,7 +329,6 @@ public class AdminForm extends JFrame {
                                 .addGap(7, 7, 7)
                                 .addComponent(jTabbedData, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(Editer)
@@ -369,17 +375,36 @@ public class AdminForm extends JFrame {
             case "Clients": {
                 DefaultListModel model = (DefaultListModel) jListClients.getModel();
                 model.clear();
-                System.out.println("CKEAR");
                 for (Client client : PPE.INSTANCE.getClientManager().findAll()) {
-                    model.addElement(client.getName());
+                    model.addElement(client.getId_client() + " - " + client.getName() + " - " + client.getMail() + " - " + client.getNumber());
                 }
                 int size = jListClients.getModel().getSize();
                 jLabelClientsSize.setText(size <= 0 ? "Aucun" : "Total " + size);
                 break;
             }
+            case "Commandes": {
+                DefaultListModel model = (DefaultListModel) jListCommandes.getModel();
+                model.clear();
+                for (Commande commande : PPE.INSTANCE.getCommandeManager().findAll()) {
+                    model.addElement(commande.getId_commande() + " - " + commande.getTransation().toString() + " - " + commande.getState() + " - " + commande.getId_client() + " - " + commande.getId_agent());
+                }
+                int size = jListCommandes.getModel().getSize();
+                jLabelCommandesSize.setText(size <= 0 ? "Aucune" : "Total " + size);
+                break;
+            }
+            case "Plugins": {
+                DefaultListModel model = (DefaultListModel) jListCommandes.getModel();
+                model.clear();
+                for (Plugin plugin : PPE.INSTANCE.getPluginManager().findAll()) {
+                    model.addElement(plugin.getId() + " - " + plugin.getName() + " - " + plugin.getPrice() + " - " + plugin.getPluginType().name());
+                }
+                int size = jListCommandes.getModel().getSize();
+                jLabelCommandesSize.setText(size <= 0 ? "Aucune" : "Total " + size);
+                break;
+            }
         }
     }
-    
+
     private void ChercherMouseClicked(java.awt.event.MouseEvent evt) {
         //DefaultListModel leModel = (DefaultListModel) jList1.getModel();
         //leModel.clear();
@@ -404,19 +429,55 @@ public class AdminForm extends JFrame {
     }
 
     private void EditerActionPerformed(java.awt.event.ActionEvent evt) {
-
+        if (currentTitle == null) {
+            return;
+        }
         JList<String> list = getModel(currentTitle);
+        if (list.getSelectedValue() == null) {
+            return;
+        }
         Map<String, String> map = new HashMap<>();
         switch (currentTitle) {
             case "Clients": {
-                System.out.println("CLIENT");
+                String clientName = list.getSelectedValue().split(" - ")[1];
                 ClientManager clientManager = PPE.INSTANCE.getClientManager();
                 for (Client client : clientManager.findAll()) {
-                    if (client.getName().equalsIgnoreCase(list.getSelectedValue())) {
+                    if (client.getName().equalsIgnoreCase(clientName)) {
                         map.put("Name", client.getName());
                         map.put("Mail", client.getMail());
                         map.put("Number", String.valueOf(client.getNumber()));
                         new ModifierForm(client.getId_client(), map, this).setVisible(true);
+                        return;
+                    }
+                }
+                break;
+            }
+            case "Commandes": {
+                JOptionPane.showMessageDialog(this,"Impossible de modifier cette commande","Modication Failed", JOptionPane.ERROR_MESSAGE);
+                /*int commandeID = Integer.parseInt(list.getSelectedValue().split(" - ")[0]);
+                System.out.println("commandeID: " + commandeID);
+
+                CommandeManager commandManager = PPE.INSTANCE.getCommandeManager();
+                for (Commande commande : commandManager.findAll()) {
+                    if (commande.getId_commande() == commandeID) {
+                        map.put("ID Agent", String.valueOf(commande.getId_agent()));
+                        map.put("ID Client", String.valueOf(commande.getId_client()));
+                        new ModifierForm(commande.getId_commande(), map, this).setVisible(true);
+                        return;
+                    }
+                }*/
+                break;
+            }
+            case "Plugins": {
+                String pluginName = list.getSelectedValue().split(" - ")[1];
+                PluginManager pluginManager = PPE.INSTANCE.getPluginManager();
+                for (Plugin plugin : pluginManager.findAll()) {
+                    if (plugin.getName().equalsIgnoreCase(pluginName)) {
+                        map.put("Name", plugin.getName());
+                        map.put("Price", String.valueOf(plugin.getPrice()));
+                        map.put("Popularity", String.valueOf(plugin.getPopularity()));
+                        map.put("Stock", String.valueOf(plugin.getStock()));
+                        new ModifierForm(plugin.getId(), map, this).setVisible(true);
                         return;
                     }
                 }
@@ -441,14 +502,32 @@ public class AdminForm extends JFrame {
     }
 
     private void SupprimerActionPerformed(java.awt.event.ActionEvent evt) {
+        if (currentTitle == null) {
+            return;
+        }
         JList<String> list = getModel(currentTitle);
+        if (list.getSelectedValue() == null) {
+            return;
+        }
         switch (currentTitle) {
             case "Clients": {
                 ClientManager clientManager = PPE.INSTANCE.getClientManager();
                 for (Client client : clientManager.findAll()) {
                     for (String item : list.getSelectedValuesList()) {
-                        if (client.getName().equalsIgnoreCase(item)) {
+                        if (client.getName().equalsIgnoreCase(item.split(" - ")[1])) {
                             clientManager.removeClient(client);
+                            ((DefaultListModel)list.getModel()).removeElement(item);
+                        }
+                    }
+                }
+                break;
+            }
+            case "Commandes": {
+                CommandeManager commandManager = PPE.INSTANCE.getCommandeManager();
+                for (Commande commande : commandManager.findAll()) {
+                    for (String item : list.getSelectedValuesList()) {
+                        if (commande.getId_commande() == Integer.parseInt(item.split(" - ")[0])) {
+                            commandManager.removeCommande(commande);
                             ((DefaultListModel)list.getModel()).removeElement(item);
                         }
                     }
@@ -462,7 +541,38 @@ public class AdminForm extends JFrame {
     }
 
     private void AjouterActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        if (currentTitle == null) {
+            return;
+        }
+        Map<String, String> map = new HashMap<>();
+        switch (currentTitle) {
+            case "Clients": {
+                map.put("Name", "Client name");
+                map.put("Mail", "Mail");
+                map.put("Number", "0");
+                new AjouterForm(map, this).setVisible(true);
+                break;
+            }
+            case "Commandes": {
+                map.put("Transation", "transation name");
+                map.put("State", "None");
+                map.put("ID Agent", "1");
+                map.put("ID Client", "1");
+                new AjouterForm(map, this).setVisible(true);
+                JOptionPane.showMessageDialog(this,"Impossible d'ajouter cette commande","Add Failed", JOptionPane.ERROR_MESSAGE);
+                break;
+            }
+            case "Plugins": {
+                map.put("Name", "plugin name");
+                map.put("Price", "0");
+                map.put("Popularity", "5");
+                map.put("Stock", "0");
+                new AjouterForm(map, this).setVisible(true);
+                break;
+            }
+        }
+        int size = jListClients.getModel().getSize();
+        jLabelClientsSize.setText(size <= 0 ? "Aucun" : "Total " + size);
     }
 
     private void jToggleButtonQuitActionPerformed(java.awt.event.ActionEvent evt) {
@@ -515,7 +625,6 @@ public class AdminForm extends JFrame {
     private javax.swing.JPanel jPanelClients;
     private javax.swing.JPanel jPanelCommandes;
     private javax.swing.JPanel jPanelPlugins;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPaneClients;
     private javax.swing.JScrollPane jScrollPaneCommandes;
     private javax.swing.JScrollPane jScrollPanePlugins;

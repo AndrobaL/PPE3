@@ -6,12 +6,9 @@ import dev.lurcat.ppe.api.Title;
 import dev.lurcat.ppe.users.Agent;
 import dev.lurcat.ppe.users.Client;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
@@ -29,19 +26,14 @@ public class ClientManager extends Manager {
 
     @MethodInfo(info = "Tester (exemple)")
     public void testLogin() {
-        Agent agent = sqlManager.login("admin", "toto");
+        Agent agent = sqlManager.login("admin", "test");
         if (agent == null) {
             System.out.println("Erreur de connexion");
         } else {
             System.out.println(agent.getInformations());
         }
         Client client = addClient("test" + ThreadLocalRandom.current().nextInt(100, 2000), "email de test", ThreadLocalRandom.current().nextInt(1000, 2000));
-        client = addClient("test" + ThreadLocalRandom.current().nextInt(100, 2000), "email de test", ThreadLocalRandom.current().nextInt(1000, 2000));
-        client = addClient("test" + ThreadLocalRandom.current().nextInt(100, 2000), "email de test", ThreadLocalRandom.current().nextInt(1000, 2000));
-        client = addClient("test" + ThreadLocalRandom.current().nextInt(100, 2000), "email de test", ThreadLocalRandom.current().nextInt(1000, 2000));
-        client = addClient("test" + ThreadLocalRandom.current().nextInt(100, 2000), "email de test", ThreadLocalRandom.current().nextInt(1000, 2000));
-        client = addClient("test" + ThreadLocalRandom.current().nextInt(100, 2000), "email de test", ThreadLocalRandom.current().nextInt(1000, 2000));
-        editClient(client);
+        //new Facture(Arrays.asList(), "100,3€", 2541351, client);
     }
 
     @MethodInfo(info = "Ajouter un client à la bdd")
@@ -85,7 +77,6 @@ public class ClientManager extends Manager {
         }
         DataAccessObject.getInstance().requeteAction("DELETE FROM Clients WHERE id_client = " + client.getId_client());
         this.findAll();
-        //new Thread(() -> {}).start();
     }
 
     @MethodInfo(info = "Avoir un client de la bdd")
@@ -94,7 +85,6 @@ public class ClientManager extends Manager {
             System.out.println("Erreur: La base de donnée est pas connectée !");
             return null;
         }
-        List<Client> clients = new ArrayList();
         try {
             ResultSet r = DataAccessObject.getInstance().requeteSelection(String.format("SELECT * FROM Clients WHERE id_client = %d", id));
             if (r.next()) {

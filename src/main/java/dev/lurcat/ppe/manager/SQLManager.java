@@ -5,7 +5,8 @@ import dev.lurcat.ppe.api.MethodInfo;
 import dev.lurcat.ppe.api.Title;
 import dev.lurcat.ppe.users.Agent;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

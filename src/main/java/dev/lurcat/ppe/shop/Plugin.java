@@ -10,7 +10,9 @@ import lombok.Setter;
 @Setter
 public class Plugin {
 
+    private int id;
     private String name;
+    private float price, popularity;
     private PluginType pluginType;
-
+    private int stock;
 }
