@@ -27,6 +27,23 @@ mkdir PPE3
 cd /PPE3
 git clone -b https://github.com/AndrobaL/PPE3
 ```
+
+Pour que le logiciel soit fonctionnel, il vous faut installer MySQL et PHPMyAdmin, il est possible de les installer grâce à WAMP (Windows), pour les utilisateurs de Linux voici un tutoriel: http://elisabeth.pointal.org/doc/code/server/lamp/phpmyadmin
+
+Il vous faudra ensuite installer la base de données du logiciel:
+
+Connectez vous sur PHPMyAdmin
+Allez sur la page Importer
+Cliquez sur choisir un fichier (cela vous ouvre un Explorateur de fichiers)
+Rendez-vous dans le dossier PPE3 que nous avons fait auparavant
+Séléctionnez le fichier PPE3.sql
+Cliquez sur le boutton "Go"
+Ensuite, ouvrez le projet sur votre IDE, et maintenant, modifiez les informations de connexion au serveur MySQL (DataAccessObject.java), vous devrez changer:
+
+L'IP par celle de votre serveur
+Le port par celui que vous utilisez (si vous avez modifié le port de MySQL)
+Les identifiants de connexion (username:password)
+
 ###### IMPORT le projet avec MAVEN
 ###### BUILD PROJECT🌀
 
