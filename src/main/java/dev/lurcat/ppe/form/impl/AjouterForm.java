@@ -124,7 +124,7 @@ public class AjouterForm extends JFrame {
                 break;
             }
             case "Plugins": {
-                PPE.INSTANCE.getPluginManager().addPlugin(list.get(0).getText(), Float.parseFloat(list.get(1).getText()), Float.parseFloat(list.get(2).getText()), Integer.parseInt(list.get(3).getText()), 0);
+                PPE.INSTANCE.getPluginManager().addPlugin(list.get(3).getText(), Float.parseFloat(list.get(0).getText()), Float.parseFloat(list.get(1).getText()), Integer.parseInt(list.get(2).getText()), 1);
                 break;
             }
         }

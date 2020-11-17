@@ -1,6 +1,7 @@
 package dev.lurcat.ppe.form;
 
 import dev.lurcat.ppe.PPE;
+import dev.lurcat.ppe.api.Facture;
 import dev.lurcat.ppe.form.impl.AjouterForm;
 import dev.lurcat.ppe.form.impl.ModifierForm;
 import dev.lurcat.ppe.manager.ClientManager;
@@ -12,9 +13,7 @@ import dev.lurcat.ppe.users.Client;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class AdminForm extends JFrame {
 
@@ -70,7 +69,7 @@ public class AdminForm extends JFrame {
             }
         });
 
-        Chercher.setText("Chercher");
+        Chercher.setText("Test Facture");
         Chercher.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ChercherMouseClicked(evt);
@@ -421,7 +420,14 @@ public class AdminForm extends JFrame {
     }
 
     private void ChercherActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this,"Une facture a été générée","Facture Success", JOptionPane.ERROR_MESSAGE);
+        ArrayList<String> panier = new ArrayList<>();
+        panier.add("test article 1");
+        panier.add("test article 2");
+        panier.add("test article 3");
+        panier.add("test article 4");
+        new Facture(panier, "10 euros", new Random().nextInt(10000), PPE.INSTANCE.getClientManager().findAll().get(0));
+
     }
 
     private void EditerMouseClicked(java.awt.event.MouseEvent evt) {
@@ -589,7 +595,6 @@ public class AdminForm extends JFrame {
     public String currentTitle;
 
     private void jTabbedDataMouseClicked(java.awt.event.MouseEvent evt) {
-        System.out.println("TG" + jTabbedData.getTitleAt(jTabbedData.getSelectedIndex()));
         currentTitle = jTabbedData.getTitleAt(jTabbedData.getSelectedIndex());
     }
 

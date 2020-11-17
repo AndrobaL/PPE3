@@ -26,14 +26,13 @@ public class ClientManager extends Manager {
 
     @MethodInfo(info = "Tester (exemple)")
     public void testLogin() {
-        Agent agent = sqlManager.login("admin", "test");
+        Agent agent = sqlManager.login("admin", "toto");
         if (agent == null) {
             System.out.println("Erreur de connexion");
         } else {
             System.out.println(agent.getInformations());
         }
         Client client = addClient("test" + ThreadLocalRandom.current().nextInt(100, 2000), "email de test", ThreadLocalRandom.current().nextInt(1000, 2000));
-        //new Facture(Arrays.asList(), "100,3€", 2541351, client);
     }
 
     @MethodInfo(info = "Ajouter un client à la bdd")

@@ -31,7 +31,7 @@ public class Facture {
         columnTitle.add("Prix Totale");
         Document unDocument = new Document(PageSize.A4);
         try {
-            PdfWriter.getInstance(unDocument, new FileOutputStream("C:\\Users\\Killyan\\Desktop\\Facture_"+leClient.getName()+"_"+idCommande+".pdf"));
+            PdfWriter.getInstance(unDocument, new FileOutputStream(System.getProperty("user.home") + "/Desktop" + "\\Facture_"+leClient.getName()+"_"+idCommande+".pdf"));
             unDocument.addAuthor(leClient.getName());
             unDocument.addTitle("Facturation_"+ leClient.getId_client());
             unDocument.open();
@@ -39,7 +39,7 @@ public class Facture {
             Paragraph p = new Paragraph("Bon de commande (ID: " + idCommande + ")", FontFactory.getFont(FontFactory.defaultEncoding,24, Font.BOLD));
             p.setAlignment(Element.ALIGN_CENTER);
 
-            Paragraph emetteur = new Paragraph("\n \n PPE Killyan \n 23 rue de L'avenur,\n 66000 PERPIGNAN \n\n",
+            Paragraph emetteur = new Paragraph("\n \n PPE Killyan \n 23 rue jean lurcat,\n 66000 PERPIGNAN \n\n",
                     FontFactory.getFont(FontFactory.defaultEncoding,13));
 
 
@@ -57,12 +57,12 @@ public class Facture {
                 c1.setHorizontalAlignment(Element.ALIGN_CENTER);
                 table.addCell(c1);
             }
-            table.setHeaderRows(1);
 
             for (String string : panier) {
-                table.addCell(string);
+                test.add("\n");
+                test.add("  -" +string);
             }
-
+            table.setHeaderRows(1);
             table.setTotalWidth(PageSize.A4.getWidth()-100);
             table.setLockedWidth(true);
 
