@@ -32,4 +32,8 @@ git clone -b https://github.com/AndrobaL/PPE3
 
 ### Documentation 📝
 
+Développeur: https://docs.google.com/document/d/1fIwXDGY6eS4XxvsA6D5F1b3hMNemuo1o452MkgsSiaw/edit?usp=sharing
+
+Utilisateur: 
+
  - Documentation - https://github.com/AndrobaL/PPE3/edit/master/README.md
