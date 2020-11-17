@@ -34,15 +34,15 @@ Il vous faudra ensuite installer la base de données du logiciel:
 
 ### Connectez vous sur PHPMyAdmin
 Allez sur la page Importer
-Cliquez sur choisir un fichier (cela vous ouvre un Explorateur de fichiers)
-Rendez-vous dans le dossier PPE3 que nous avons fait auparavant
-Séléctionnez le fichier PPE3.sql
-Cliquez sur le boutton "Go"
+ - Cliquez sur choisir un fichier (cela vous ouvre un Explorateur de fichiers)
+ - Rendez-vous dans le dossier PPE3 que nous avons fait auparavant
+ - Séléctionnez le fichier PPE3.sql
+ - Cliquez sur le boutton "Go"
 Ensuite, ouvrez le projet sur votre IDE, et maintenant, modifiez les informations de connexion au serveur MySQL (DataAccessObject.java), vous devrez changer:
 
-L'IP par celle de votre serveur
-Le port par celui que vous utilisez (si vous avez modifié le port de MySQL)
-Les identifiants de connexion (username:password)
+ - L'IP par celle de votre serveur
+ - Le port par celui que vous utilisez (si vous avez modifié le port de MySQL)
+ - Les identifiants de connexion (username:password)
 
 ###### IMPORT le projet avec MAVEN
 ###### BUILD PROJECT🌀
