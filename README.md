@@ -32,7 +32,7 @@ Pour que le logiciel soit fonctionnel, il vous faut installer MySQL et PHPMyAdmi
 
 Il vous faudra ensuite installer la base de données du logiciel:
 
-Connectez vous sur PHPMyAdmin
+### Connectez vous sur PHPMyAdmin
 Allez sur la page Importer
 Cliquez sur choisir un fichier (cela vous ouvre un Explorateur de fichiers)
 Rendez-vous dans le dossier PPE3 que nous avons fait auparavant
